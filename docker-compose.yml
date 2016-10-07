@@ -1,0 +1,16 @@
+version: '2'
+services:
+    app:
+        image: maven
+        volumes:
+            - .:/global
+        working_dir: /global
+        command: [/bin/bash, ./entrypoint.sh]
+        depends_on:
+            - db
+    db:
+        image: arangodb
+        ports:
+            - 8529:8529
+        environment:
+            - ARANGO_NO_AUTH=1
